@@ -35,7 +35,12 @@ export default {
                 cursor: pointer;
                 display: flex;
                 align-items: center;
+                img {
+                    height: 18px;
+                    width: 18px;
+                }
                 span {
+                    font-size: 18px;
                     margin-left: 12px;
                 }
             }
