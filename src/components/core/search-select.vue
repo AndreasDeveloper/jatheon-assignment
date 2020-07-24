@@ -1,8 +1,8 @@
 <template>
   <div class="jt-select">
-    <input type="text" name="select-user" placeholder="No user selected" class="select-user-el" @click="openDropdown" />
-    <ion-icon name="chevron-down-outline" class="dd-icon" v-if="openD"></ion-icon>
-    <ion-icon name="chevron-up-outline" class="dd-icon" v-else></ion-icon>
+    <input type="text" name="select-user" placeholder="No user selected" id="user-s" class="select-user-el" @click="openDropdown" />
+    <ion-icon name="chevron-down-outline" class="dd-icon" v-if="openD" @click="openDropdown"></ion-icon>
+    <ion-icon name="chevron-up-outline" class="dd-icon" v-else @click="openDropdown"></ion-icon>
     <div id="dd1" class="dropdown" v-if="openD">
       <form>
         <ion-icon name="search" class="search-icon"></ion-icon>
@@ -90,6 +90,7 @@ export default {
   methods: {
     openDropdown() {
         this.openD = !this.openD;
+        document.querySelector('#user-s').classList.toggle('borderChange');
     },
     selectAll() {
         this.checkA = !this.checkA;
@@ -165,5 +166,10 @@ export default {
         }
     }
   }
+}
+
+// Toggle state for button styles
+.borderChange {
+    border: 1px solid #00A88D !important;
 }
 </style>
