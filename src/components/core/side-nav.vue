@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-wrap">
+    <div class="side-nav-wrap">
         <img src="../../assets/logo.png" alt="Jatheon Logo" class="logo-main">
         <div class="nav-elements">
             <ul>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-wrap {
+.side-nav-wrap {
     background-color: #E1E7E9;
     min-height: 100vh;
     width: 250px;
