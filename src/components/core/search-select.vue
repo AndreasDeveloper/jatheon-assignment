@@ -1,10 +1,10 @@
 <template>
   <div class="jt-select">
-    <input type="text" name="select-user" placeholder="No user selected" id="user-s" class="select-user-el" @click="openDropdown" />
+    <input type="text" :name="fieldName" :placeholder="placeholder" id="user-s" class="select-user-el" @click="openDropdown" />
     <ion-icon name="chevron-down-outline" class="dd-icon" v-if="openD" @click="openDropdown"></ion-icon>
     <ion-icon name="chevron-up-outline" class="dd-icon" v-else @click="openDropdown"></ion-icon>
     <div id="dd1" class="dropdown" v-if="openD">
-      <form>
+      <form v-if="searchInField">
         <ion-icon name="search" class="search-icon"></ion-icon>
         <input
           type="text"
@@ -18,9 +18,9 @@
                 <input type="checkbox" name="select_all">
                 <label for="select_all">Select All</label>
             </div>
-            <div class="result-users__el" v-for="(user, i) in users" :key="i">
-                <input type="checkbox" :name="user" :checked="checkA">
-                <label :for="user">{{ user }}</label>
+            <div class="result-users__el" v-for="(el, i) in list" :key="i">
+                <input type="checkbox" :name="el" :checked="checkA">
+                <label :for="el">{{ el }}</label>
             </div>
         </div>
     </div>
@@ -30,61 +30,24 @@
 <script>
 export default {
   name: "SearchSelect",
+  props: {
+    list: {
+      type: Array
+    },
+    searchInField: {
+      type: Boolean
+    },
+    placeholder: {
+      type: String
+    },
+    fieldName: {
+      type: String
+    }
+  },
   data() {
     return {
       openD: false,
-      checkA: false,
-      users: [
-        "zena.huels@gmail.com",
-        "welch.lauren@gmail.com",
-        "tillman.marisa@cole.com",
-        "mariela.lesch@gmail.com",
-        "abshire.bertrand@hotmail.com",
-        "bledner@hotmail.com",
-        "skreiger@jacobs.biz",
-        "dbrakus@yahoo.com",
-        "tyra.heidenreich@powlowski.com",
-        "vwehner@tremblay.com",
-        "kessler.eugene@gmail.com",
-        "murray.spencer@wisozk.info",
-        "toby63@welch.com",
-        "rashawn51@yahoo.com",
-        "kelsi.crona@crona.net",
-        "keebler.monty@mann.com",
-        "blanda.rhett@gaylord.com",
-        "lebsack.kristy@hotmail.com",
-        "bridget33@schuster.com",
-        "herzog.maymie@wehner.com",
-        "ashleigh10@hotmail.com",
-        "weber.sister@yahoo.com",
-        "ipfeffer@hotmail.com",
-        "derek60@hotmail.com",
-        "west.jude@weber.info",
-        "eschneider@hintz.biz",
-        "evalyn52@goodwin.biz",
-        "barrett.auer@wilderman.com",
-        "lehner.dayton@yahoo.com",
-        "prohaska.britney@hansen.com",
-        "christiana59@huels.com",
-        "jgerhold@yahoo.com",
-        "santino63@bashirian.com",
-        "kennith.buckridge@gmail.com",
-        "zgoodwin@hotmail.com",
-        "jaquan.stark@hotmail.com",
-        "raynor.jules@brown.org",
-        "curt.johnson@wisozk.com",
-        "felton96@wisoky.com",
-        "michelle24@hammes.com",
-        "nkoelpin@bernhard.com",
-        "araceli.goyette@yahoo.com",
-        "hrutherford@gmail.com",
-        "qschiller@denesik.com",
-        "rico.mayer@yahoo.com",
-        "amari90@hotmail.com",
-        "bframi@gmail.com",
-        "fadel.kendall@ward.org",
-        "rafael.upton@bayer.info"
-      ]
+      checkA: false
     };
   },
   methods: {
@@ -107,7 +70,7 @@ export default {
     cursor: pointer;
   }
   .select-user-el {
-    border: 1px solid #9B9B9B;
+    border: 1.5px solid #9B9B9B;
     border-radius: 4px;
     outline: none;
     height: 18px;
@@ -161,8 +124,22 @@ export default {
     &__el {
         display: flex;
         align-items: center;
+        overflow-x: hidden;
+        input {
+          &:hover {
+            background: #00A88D;
+            color: #00A88D;
+            border-color: #00A88D;
+          }
+        }
         label {
+            cursor: pointer;
             margin-left: 5px;
+            text-align: left;
+            transition: all .2s ease-in-out;
+            &:hover {
+              color: #00A88D;
+            }
         }
     }
   }
@@ -170,6 +147,6 @@ export default {
 
 // Toggle state for button styles
 .borderChange {
-    border: 1px solid #00A88D !important;
+    border: 1.5px solid #00A88D !important;
 }
 </style>
