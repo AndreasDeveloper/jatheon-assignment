@@ -148,6 +148,7 @@ export default {
   display: flex;
   align-items: center;
   margin-top: 5px;
+  z-index: 10;
   .filter-elements {
     padding: 20px;
     form {

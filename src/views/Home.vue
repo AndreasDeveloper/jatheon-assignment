@@ -47,6 +47,7 @@ export default {
   background-color: #F4F4F4;
   height: 100%;
   position: relative;
+  z-index: 1;
   .el-wrap {
     position: absolute;
     top: 30%;
