@@ -125,12 +125,9 @@ export default {
         display: flex;
         align-items: center;
         overflow-x: hidden;
-        input {
-          &:hover {
-            background: #00A88D;
-            color: #00A88D;
-            border-color: #00A88D;
-          }
+        input:checked {
+          color: #00A88D;
+          background: #00A88D;
         }
         label {
             cursor: pointer;

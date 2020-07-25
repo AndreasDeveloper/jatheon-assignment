@@ -21,11 +21,21 @@
           <span class="user-email">mike.andrew@jatheon.com</span>
           <span class="team-name">Jatheon Technologies</span>
           <ul>
-            <li>Account Settings</li>
-            <li>Company Settings</li>
-            <li>Help Center</li>
-            <li>Keyboard Shortcuts</li>
-            <li>Log Out</li>
+            <li>
+              <a href="#">Account Settings</a>
+            </li>
+            <li>
+              <a href="#">Company Settings</a>
+            </li>
+            <li>
+              <a href="#">Help Center</a>
+            </li>
+            <li>
+              <a href="#">Keyboard Shortcuts</a>
+            </li>
+            <li>
+              <a href="#">Log Out</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -44,7 +54,7 @@ export default {
   methods: {
     openDropdown() {
       this.openD = !this.openD;
-      document.querySelector('#uinitials').classList.toggle('backColor');
+      document.querySelector("#uinitials").classList.toggle("backColor");
     },
   },
 };
@@ -148,13 +158,16 @@ export default {
     padding: 10px 0px 0px 0px;
     margin-bottom: 0px;
     li {
-      color: #3e4543;
       cursor: pointer;
       font-size: 14px;
       margin: 10px 0;
-      transition: all 0.2s ease-in-out;
-      &:hover {
-        color: #00a88d;
+      a {
+        color: #3e4543;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          color: #00a88d;
+        }
       }
     }
     li:nth-child(5) {
@@ -164,7 +177,7 @@ export default {
 }
 
 .backColor {
-    background-color: #00a88c38 !important;
-    color: #00A88D !important;
+  background-color: #00a88c38 !important;
+  color: #00a88d !important;
 }
 </style>
