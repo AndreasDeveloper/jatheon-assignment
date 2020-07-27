@@ -54,7 +54,7 @@ export default {
       filter: '',
       mails: [],
       checkedMails: [],
-      checkedActions: []
+      checkedActions: [],
     };
   },
   watch: {

@@ -7,7 +7,10 @@
     >
       <span class="checkbox-select__title" v-if="checkedFilters.length < 1">No user selected</span>
       <span class="checkbox-select__title" v-else-if="allSelected">{{ field1Text }}</span>
-      <span class="checkbox-select__title" v-else-if="checkedFilters.length > 0 && allSelected === false">{{ checkedFilters[checkedFilters.length - 1] }}</span>
+      <span
+        class="checkbox-select__title"
+        v-else-if="checkedFilters.length > 0 && allSelected === false"
+      >{{ checkedFilters[checkedFilters.length - 1] }}</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
         <path
           d="M121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z"
@@ -15,15 +18,9 @@
       </svg>
     </div>
     <div :id="dropName" class="checkbox-select__dropdown" :class="{ activeSearch: showLoader }">
-      <div class="checkbox-select__search-wrapp">
+      <div class="checkbox-select__search-wrapp" v-if="showSearch">
         <ion-icon name="search" class="search-icon"></ion-icon>
-        <input
-          type="text"
-          @focus="showLoader = true"
-          @blur="showLoader = false"
-          placeholder="Search for a user.."
-          v-model="search"
-        />
+        <input type="text" placeholder="Search for a user.." v-model="search" />
         <ion-icon
           name="close-outline"
           class="reset-search"
@@ -31,7 +28,7 @@
           @click="resetSearch"
         ></ion-icon>
       </div>
-      <div class="checkbox-select__col">
+      <div :class="!showSearch ? 'checkbox-select__col marginTop' : 'checkbox-select__col'">
         <div class="checkbox-select__select-all">
           <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
           <input type="checkbox" id="selectAll" @click="selectAll" />
@@ -39,7 +36,7 @@
         </div>
       </div>
       <ul class="checkbox-select__filters-wrapp">
-        <li v-for="(filter, index) in list" :key="index">
+        <li v-for="(filter, index) in filteredList" :key="index">
           <div class="checkbox-select__check-wrapp">
             <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
             <input
@@ -50,6 +47,7 @@
               type="checkbox"
             />
             <label :for="index">{{filter}}</label>
+            <span v-if="filteredList.length === 0">No Results Found</span>
           </div>
         </li>
       </ul>
@@ -62,10 +60,13 @@ export default {
   name: "jtSelect",
   props: {
     list: {
-      type: Array
+      type: Array,
     },
     dropName: {
-      type: String
+      type: String,
+    },
+    showSearch: {
+      type: Boolean
     }
   },
   data() {
@@ -77,7 +78,7 @@ export default {
       activeTrigger: false,
       dropdown: false,
       showLoader: false,
-      field1Text: ''
+      field1Text: "",
     };
   },
   computed: {
@@ -94,7 +95,7 @@ export default {
       this.selectAllText =
         this.selectAllText == "Select All" ? "Clear All" : "Select All";
       if (this.allSelected) {
-        this.field1Text = 'All Selected';
+        this.field1Text = "All Selected";
         for (let i = 0; i < this.$props.list.length; i++) {
           this.checkedFilters.push(this.$props.list[i].toString());
         }
@@ -120,7 +121,7 @@ export default {
       } else {
         this.dropdown = false;
         this.activeTrigger = false;
-        TweenMax.to("#dropdown", 0.2, {
+        TweenMax.to(`#${this.$props.dropName}`, 0.2, {
           autoAlpha: 0,
           y: -10,
           ease: Power2.easeOut,
@@ -135,5 +136,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/global/dropdown.scss';
+@import "../../styles/global/dropdown.scss";
+
+.marginTop {
+  margin-top: 10px;
+}
 </style>
