@@ -31,7 +31,7 @@
       <div :class="!showSearch ? 'checkbox-select__col marginTop' : 'checkbox-select__col'">
         <div class="checkbox-select__select-all" v-if="!hideSA || search.length === 0">
           <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
-          <input type="checkbox" id="selectAll" @click="selectAll" />
+          <input type="checkbox" :id="selectAllID" @click="selectAll" />
           <label for="selectAll">{{selectAllText}}</label>
         </div>
       </div>
@@ -72,6 +72,9 @@ export default {
     },
     disableD2: {
       type: Boolean
+    },
+    selectAllID: {
+      type: String
     }
   },
   data() {
