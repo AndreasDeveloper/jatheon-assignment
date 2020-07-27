@@ -34,6 +34,7 @@
       <ul class="checkbox-select__filters-wrapp">
         <li v-for="(filter, index) in filteredList" :key="index">
           <div class="checkbox-select__check-wrapp">
+            <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
             <input
               :id="index"
               class="conditions-check"
@@ -307,7 +308,7 @@ input {
   }
   &__search-wrapp {
     position: relative;
-    padding: 10px 25px 5px;
+    padding: 10px 10px 5px;
     @media only screen and (max-width: 600px) {
       padding: 10px 15px 5px;
     }
@@ -316,7 +317,7 @@ input {
       font-size: 16px;
       position: absolute;
       top: 35%;
-      left: 12%;
+      left: 7%;
     }
     input {
       width: 100%;
@@ -325,7 +326,7 @@ input {
       border-radius: 4px;
       font-size: 14px;
       background-color: #f4f4f4;
-      padding-left: 25px;
+      padding-left: 30px;
     }
     .reset-search {
       cursor: pointer;
@@ -376,7 +377,7 @@ input {
     list-style: none;
     text-align: left;
     padding-left: 0;
-    margin-top: 20px;
+    margin-top: 5px;
     height: 157px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -384,10 +385,17 @@ input {
 
   &__check-wrapp {
     position: relative;
-    padding: 0 25px;
+    padding: 0 10px;
     margin-bottom: 5px;
     @media only screen and (max-width: 600px) {
       padding: 0 15px;
+    }
+    .check-icon {
+      color: #fff;
+      position: absolute;
+      top: 25%;
+      z-index: 999;
+      cursor: pointer;
     }
     input[type="checkbox"] {
       display: none;
@@ -406,6 +414,12 @@ input {
         -ms-user-select: none;
         user-select: none;
         transition: padding 0.25s ease;
+        &:hover {
+          color: #00a88d;
+          &:after {
+            border: 1px solid #00a88d;
+          }
+        }
         &:after {
           border: solid 1px #9b9b9b;
           border-radius: 4px;
@@ -427,8 +441,11 @@ input {
           background-color: #00a88d;
           opacity: 0;
           will-change: transform;
-          transform: scale(1);
+          transform: scale(0.5);
           transition: all 0.2s ease;
+          .check-icon {
+            display: block;
+          }
         }
         &:hover {
           padding-left: 32px;
