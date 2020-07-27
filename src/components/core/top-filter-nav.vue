@@ -2,9 +2,10 @@
   <div class="top-filter-nav-wrap">
     <div class="filter-elements">
       <form>
-        <jtSelect />
+        <jtSelect class="form-el" :list="users" :dropName="'dropdown'" />
+        <jtSelect class="form-el" :list="actions" :dropName="'dropdown2'" />
         <!-- <SearchSelect class="form-el" :list="users" :searchInField="true" :placeholder="'No user selected'" :fieldName="'selectUser'" /> -->
-        <SearchSelect class="form-el" :list="actions" :searchInField="false" :placeholder="'No actions selected'" :fieldName="'selectAction'" />
+        <!-- <SearchSelect class="form-el" :list="actions" :searchInField="false" :placeholder="'No actions selected'" :fieldName="'selectAction'" /> -->
         <input class="select-user-el" name="filter_res" placeholder="Filter results.." />
         <button type="submit" class="search-btn">Search Now</button>
       </form>
