@@ -50,6 +50,7 @@
             <span v-if="filteredList.length === 0">No Results Found</span>
           </div>
         </li>
+        <span class="no-res" v-if="filteredList.length === 0">No Results Found</span>
       </ul>
     </div>
   </div>
@@ -96,7 +97,7 @@ export default {
       this.selectAllText =
         this.selectAllText == "Select All" ? "Clear All" : "Select All";
       if (this.allSelected) {
-        this.field1Text = "All Selected";
+        this.field1Text = "All Users";
         for (let i = 0; i < this.$props.list.length; i++) {
           this.checkedFilters.push(this.$props.list[i].toString());
         }
@@ -145,5 +146,10 @@ export default {
 
 .isActive {
   border: 1.5px solid #00A88D;
+}
+.no-res {
+  color: #9B9B9B;
+  font-size: 14px;
+  padding-left: 10px;
 }
 </style>

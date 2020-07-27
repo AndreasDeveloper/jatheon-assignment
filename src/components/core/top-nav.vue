@@ -12,13 +12,13 @@
       </form>
       <div class="user-data">
         <span id="uinitials" class="user-initials" @click="openDropdown">
-          <strong>MA</strong>
+          <strong>JD</strong>
         </span>
         <ion-icon name="chevron-up-outline" class="dd-icon" v-if="openD"></ion-icon>
         <ion-icon name="chevron-down-outline" class="dd-icon" v-else></ion-icon>
         <div id="userD" class="dropdown" v-if="openD">
           <span class="d-title">Administrator</span>
-          <span class="user-email">mike.andrew@jatheon.com</span>
+          <span class="user-email">john.doe@jatheon.com</span>
           <span class="team-name">Jatheon Technologies</span>
           <ul>
             <li>

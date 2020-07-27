@@ -40,8 +40,9 @@ export default {
                     width: 18px;
                 }
                 span {
-                    font-size: 18px;
+                    font-size: 16px;
                     margin-left: 12px;
+                    line-height: 1;
                 }
             }
         }
