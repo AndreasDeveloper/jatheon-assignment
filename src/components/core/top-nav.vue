@@ -65,6 +65,7 @@ export default {
   background-color: #fff;
   width: 100%;
   height: 60px;
+  z-index: 15;
   .top-elements {
     display: flex;
     align-items: center;

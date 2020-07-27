@@ -1,6 +1,7 @@
 <template>
   <div class="jt-select">
-    <input type="text" :name="fieldName" :placeholder="placeholder" id="user-s" class="select-user-el" @click="openDropdown" />
+    <input type="text" :name="fieldName" :placeholder="placeholder" id="user-s" class="select-user-el" @click="openDropdown" v-if="searchInField" :value="checkedMails[checkedMails.length - 1]" />
+    <input type="text" :name="fieldName" :placeholder="placeholder" id="user-s" class="select-user-el" @click="openDropdown" v-else />
     <ion-icon name="chevron-down-outline" class="dd-icon" v-if="openD" @click="openDropdown"></ion-icon>
     <ion-icon name="chevron-up-outline" class="dd-icon" v-else @click="openDropdown"></ion-icon>
     <div id="dd1" class="dropdown" v-if="openD">
@@ -11,6 +12,8 @@
           name="search"
           placeholder="Search for a user.."
           class="search-field"
+          v-model="filter"
+          @keyup="filterMails"
         />
         </form>
         <div class="result-users">
@@ -19,7 +22,7 @@
                 <label for="select_all">Select All</label>
             </div>
             <div class="result-users__el" v-for="(el, i) in list" :key="i">
-                <input type="checkbox" :name="el" :checked="checkA">
+                <input type="checkbox" class="checkboxes1" :name="el" :checked="checkA" @click="handleCheck($event)">
                 <label :for="el">{{ el }}</label>
             </div>
         </div>
@@ -47,8 +50,22 @@ export default {
   data() {
     return {
       openD: false,
-      checkA: false
+      checkA: false,
+      filter: '',
+      mails: [],
+      checkedMails: [],
+      checkedActions: []
     };
+  },
+  watch: {
+    list: {
+      handler(val, oldVal) {
+        if (val.length < 50) {
+          this.mails = val;
+        }
+      },
+      immediate: true
+    }
   },
   methods: {
     openDropdown() {
@@ -57,6 +74,18 @@ export default {
     },
     selectAll() {
         this.checkA = !this.checkA;
+    },
+    filterMails() {
+      console.log(this.field)
+      for (let i = 0; i < this.mails.length; i++) {
+        if (this.filter.split('') === this.mails[i].split('')) {
+          console.log(this.mails[i])
+        }
+      }
+    },
+    handleCheck(e) {
+      this.checkedMails.push(e.target.name);
+      console.log(this.checkedMails)
     }
   }
 };
