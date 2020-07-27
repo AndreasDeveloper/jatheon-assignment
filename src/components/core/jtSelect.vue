@@ -24,7 +24,7 @@
         <ion-icon
           name="close-outline"
           class="reset-search"
-          v-if="search.length > 1"
+          v-if="search.length > 0"
           @click="resetSearch"
         ></ion-icon>
       </div>
@@ -140,5 +140,9 @@ export default {
 
 .marginTop {
   margin-top: 10px;
+}
+
+.isActive {
+  border: 1.5px solid #00A88D;
 }
 </style>
