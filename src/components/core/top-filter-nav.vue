@@ -13,7 +13,7 @@
             @click="resetFilter"
             ></ion-icon>
         </div>
-        <button type="submit" class="search-btn">Search Now</button>
+        <button type="submit" :class="searchBtnDis ? 'search-btn btn-disabled' : 'search-btn'" @click="searchFunc" :disabled="searchBtnDis">Search Now</button>
       </form>
     </div>
   </div>
@@ -144,12 +144,16 @@ export default {
         'Delete Recent Simple Search',
         'Delete Recent Advanced Search'
       ],
-      filterText: ''
+      filterText: '',
+      searchBtnDis: false
     };
   },
   methods: {
       resetFilter() {
-          this.filterText = '';
+        this.filterText = '';
+      },
+      searchFunc() {
+          this.searchBtnDis = true;
       }
   }
 };
@@ -206,6 +210,10 @@ export default {
     &:hover {
         background-color: darken(#00A88D, 3%);
     }
+}
+.btn-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .filter-field-wrap {
