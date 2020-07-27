@@ -20,7 +20,7 @@
     <div :id="dropName" class="checkbox-select__dropdown" :class="{ activeSearch: showLoader }">
       <div class="checkbox-select__search-wrapp" v-if="showSearch">
         <ion-icon name="search" class="search-icon"></ion-icon>
-        <input type="text" placeholder="Search for a user.." v-model="search" />
+        <input type="text" placeholder="Search for a user.." v-model="search" @keyup="hideSA = true" />
         <ion-icon
           name="close-outline"
           class="reset-search"
@@ -29,7 +29,7 @@
         ></ion-icon>
       </div>
       <div :class="!showSearch ? 'checkbox-select__col marginTop' : 'checkbox-select__col'">
-        <div class="checkbox-select__select-all">
+        <div class="checkbox-select__select-all" v-if="!hideSA || search.length === 0">
           <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
           <input type="checkbox" id="selectAll" @click="selectAll" />
           <label for="selectAll">{{selectAllText}}</label>
@@ -79,6 +79,7 @@ export default {
       dropdown: false,
       showLoader: false,
       field1Text: "",
+      hideSA: false
     };
   },
   computed: {
