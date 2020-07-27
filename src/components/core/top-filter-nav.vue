@@ -4,9 +4,15 @@
       <form>
         <jtSelect class="form-el" :list="users" :dropName="'dropdown'" :showSearch="true" />
         <jtSelect class="form-el" :list="actions" :dropName="'dropdown2'" :showSearch="false" />
-        <!-- <SearchSelect class="form-el" :list="users" :searchInField="true" :placeholder="'No user selected'" :fieldName="'selectUser'" /> -->
-        <!-- <SearchSelect class="form-el" :list="actions" :searchInField="false" :placeholder="'No actions selected'" :fieldName="'selectAction'" /> -->
-        <input class="select-user-el" name="filter_res" placeholder="Filter results.." />
+        <div class="filter-field-wrap">
+            <input class="select-user-el" name="filter_res" placeholder="Filter results.." v-model="filterText" />
+            <ion-icon
+            name="close-outline"
+            class="reset-search"
+            v-if="filterText.length > 0"
+            @click="resetFilter"
+            ></ion-icon>
+        </div>
         <button type="submit" class="search-btn">Search Now</button>
       </form>
     </div>
@@ -137,9 +143,15 @@ export default {
         'Delete Saved Search',
         'Delete Recent Simple Search',
         'Delete Recent Advanced Search'
-      ]
+      ],
+      filterText: ''
     };
   },
+  methods: {
+      resetFilter() {
+          this.filterText = '';
+      }
+  }
 };
 </script>
 
@@ -174,6 +186,9 @@ export default {
     height: 18px;
     width: 250px;
     padding: 10px;
+    &:focus {
+        border: 1.5px solid #00A88D;
+    }
   }
 
 .search-btn {
@@ -187,5 +202,26 @@ export default {
     outline: none;
     margin: 0 15px;
     width: 115px;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background-color: darken(#00A88D, 3%);
+    }
+}
+
+.filter-field-wrap {
+    position: relative;
+    width: 250px;
+    input {
+        width: 225px;
+    }
+    .reset-search {
+        position: absolute;
+        right: 3%;
+        top: 30%;
+        cursor: pointer;
+        &:hover {
+            color:#00A88D;
+        }
+    }
 }
 </style>

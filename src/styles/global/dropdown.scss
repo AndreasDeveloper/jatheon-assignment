@@ -68,10 +68,10 @@
       }
     }
     &__title {
+      color: #3E4543;
       font-size: 12px;
       flex: 1;
       padding-right: 25px;
-      letter-spacing: 1px;
       @media only screen and (max-width: 600px) {
         font-size: 19px;
       }

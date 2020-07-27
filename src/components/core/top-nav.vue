@@ -30,9 +30,9 @@
             <li>
               <a href="#">Help Center</a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#">Keyboard Shortcuts</a>
-            </li>
+            </li> -->
             <li>
               <a href="#">Log Out</a>
             </li>
