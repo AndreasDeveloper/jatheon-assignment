@@ -2,7 +2,7 @@
   <div class="cs-wrap">
     <div
       class="checkbox-select__trigger"
-      :class="{ isActive: activeTrigger }"
+      :class="{ isActive: activeTrigger, disabledField: disableD2 }"
       @click="showDropdown"
     >
       <span class="checkbox-select__title" v-if="checkedFilters.length < 1">No user selected</span>
@@ -40,13 +40,14 @@
           <div class="checkbox-select__check-wrapp">
             <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
             <input
-              :id="index"
+              :id="filter.id"
               class="conditions-check"
               v-model="checkedFilters"
-              :value="filter"
+              :value="filter.name"
               type="checkbox"
+              @change="emitChecked"
             />
-            <label :for="index">{{filter}}</label>
+            <label :for="filter.id">{{filter.name}}</label>
             <span v-if="filteredList.length === 0">No Results Found</span>
           </div>
         </li>
@@ -68,6 +69,9 @@ export default {
     },
     showSearch: {
       type: Boolean
+    },
+    disableD2: {
+      type: Boolean
     }
   },
   data() {
@@ -86,7 +90,7 @@ export default {
   computed: {
     filteredList() {
       return this.$props.list.filter((item) => {
-        return item.toLowerCase().includes(this.search.toLowerCase());
+        return item.name.toLowerCase().includes(this.search.toLowerCase());
       });
     },
   },
@@ -99,12 +103,12 @@ export default {
       if (this.allSelected) {
         this.field1Text = "All Users";
         for (let i = 0; i < this.$props.list.length; i++) {
-          this.checkedFilters.push(this.$props.list[i].toString());
+          this.checkedFilters.push(this.$props.list[i].name.toString());
         }
       }
     },
     showDropdown: function () {
-      if (this.dropdown == false) {
+      if (this.dropdown == false && this.$props.disableD2 === false) {
         this.dropdown = true;
         this.activeTrigger = true;
         TweenMax.fromTo(
@@ -133,6 +137,9 @@ export default {
     resetSearch() {
       this.search = "";
     },
+    emitChecked() {
+      this.$emit('emitChecked', this.checkedFilters);
+    }
   },
 };
 </script>
@@ -151,5 +158,10 @@ export default {
   color: #9B9B9B;
   font-size: 14px;
   padding-left: 10px;
+}
+
+.disabledField {
+  background: #F4F4F4;
+  border: 1.5px solid #CFCFCF;
 }
 </style>
