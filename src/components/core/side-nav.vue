@@ -5,7 +5,7 @@
             <ul>
                 <li>
                     <img src="../../assets/icondashboard.svg" alt="Dashboard Icon">
-                    <span><strong>Audit</strong></span>
+                    <span><a href="#"><strong>Audit</strong></a></span>
                 </li>
             </ul>
         </div>
@@ -43,6 +43,10 @@ export default {
                     font-size: 16px;
                     margin-left: 12px;
                     line-height: 1;
+                    a {
+                        color: inherit;
+                        text-decoration: none;
+                    }
                 }
             }
         }
