@@ -107,7 +107,6 @@ export default {
       this.selectAllText =
         this.selectAllText == "Select All" ? "Clear All" : "Select All";
       if (this.allSelected) {
-        console.log(this.$props)
         if (this.$props.dropName === 'dropdown2') {
           this.field1Text = 'All Actions';
         } else {
