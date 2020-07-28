@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import SearchSelect from "@/components/core/search-select.vue";
 import jtSelect from "@/components/core/jtSelect.vue";
 
 export default {
