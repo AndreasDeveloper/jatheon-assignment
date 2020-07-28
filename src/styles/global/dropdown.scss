@@ -195,6 +195,11 @@
         top: 25%;
         z-index: 999;
         cursor: pointer;
+        &:hover {
+          & + label:hover {
+            color: #00a88d;
+          }
+        }
       }
     }
   }

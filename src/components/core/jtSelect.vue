@@ -30,7 +30,7 @@
       </div>
       <div :class="!showSearch ? 'checkbox-select__col marginTop' : 'checkbox-select__col'">
         <div class="checkbox-select__select-all" v-if="!hideSA || search.length === 0">
-          <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
+          <ion-icon name="checkmark-outline" class="check-icon" @click="checkCheckbox($event)"></ion-icon>
           <input type="checkbox" :id="selectAllID" @click="selectAll" />
           <label :for="selectAllID">{{selectAllText}}</label>
         </div>
@@ -38,7 +38,7 @@
       <ul class="checkbox-select__filters-wrapp">
         <li v-for="(filter, index) in filteredList" :key="index">
           <div class="checkbox-select__check-wrapp">
-            <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
+            <ion-icon name="checkmark-outline" class="check-icon" @click="checkCheckbox($event)"></ion-icon>
             <input
               :id="filter.id"
               class="conditions-check"
@@ -48,7 +48,6 @@
               @change="emitChecked"
             />
             <label :for="filter.id">{{filter.name}}</label>
-            <span v-if="filteredList.length === 0">No Results Found</span>
           </div>
         </li>
         <span class="no-res" v-if="filteredList.length === 0">No Results Found</span>
@@ -148,6 +147,19 @@ export default {
       this.search = "";
     },
     emitChecked() {
+      this.$emit('emitChecked', this.checkedFilters);
+    },
+    checkCheckbox(e) {
+      console.log(e.path[4].children[1].checked)
+      let checked = e.path[4].children[1].checked;
+      let index = this.checkedFilters.indexOf(e.path[4].children[1].value);
+      if (checked === true) {
+        checked = false;
+        this.checkedFilters.splice(index, 1);
+      } else {
+        this.checkedFilters.push(e.path[4].children[1].value);
+        checked = true;
+      }
       this.$emit('emitChecked', this.checkedFilters);
     }
   },

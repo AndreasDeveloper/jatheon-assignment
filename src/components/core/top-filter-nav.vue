@@ -25,7 +25,6 @@ import jtSelect from "@/components/core/jtSelect.vue";
 export default {
   name: "TopFilterNav",
   components: {
-    SearchSelect,
     jtSelect
   },
   data() {
@@ -156,7 +155,6 @@ export default {
           this.searchBtnDis = true;
       },
       checkFilters(payload) {
-          console.log(payload)
           if (payload.length < 1) {
               this.disableD2 = true;
           } else {
