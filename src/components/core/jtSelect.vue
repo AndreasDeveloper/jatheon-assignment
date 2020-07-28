@@ -17,7 +17,7 @@
         />
       </svg>
     </div>
-    <div :id="dropName" class="checkbox-select__dropdown" :class="{ activeSearch: showLoader }">
+    <div :id="dropName" class="checkbox-select__dropdown">
       <div class="checkbox-select__search-wrapp" v-if="showSearch">
         <ion-icon name="search" class="search-icon"></ion-icon>
         <input type="text" placeholder="Search for a user.." v-model="search" @keyup="hideSA = true" />
@@ -30,8 +30,8 @@
       </div>
       <div :class="!showSearch ? 'checkbox-select__col marginTop' : 'checkbox-select__col'">
         <div class="checkbox-select__select-all" v-if="!hideSA || search.length === 0">
-          <ion-icon name="checkmark-outline" class="check-icon" @click="checkCheckbox($event)"></ion-icon>
-          <input type="checkbox" :id="selectAllID" @click="selectAll" />
+          <ion-icon name="checkmark-outline" class="check-icon" @click="selectAll($event)"></ion-icon>
+          <input type="checkbox" :id="selectAllID" @click="selectAll($event)" :value="selectAllID" />
           <label :for="selectAllID">{{selectAllText}}</label>
         </div>
       </div>
@@ -87,7 +87,6 @@ export default {
       selectAllText: "Select All",
       activeTrigger: false,
       dropdown: false,
-      showLoader: false,
       field1Text: "",
       hideSA: false
     };
@@ -100,7 +99,12 @@ export default {
     },
   },
   methods: {
-    selectAll: function () {
+    selectAll: function (e) {
+      if (e.path[4].children[1].checked === false) {
+        e.path[4].children[1].checked = true;
+      } else {
+        e.path[4].children[1].checked = false;
+      }
       this.allSelected = !this.allSelected;
       this.checkedFilters = [];
       this.selectAllText =
@@ -115,6 +119,7 @@ export default {
           this.checkedFilters.push(this.$props.list[i].name.toString());
         }
       }
+      this.$emit('emitChecked', this.checkedFilters);
     },
     showDropdown: function () {
       if (this.dropdown == false && this.$props.disableD2 === false) {
@@ -150,7 +155,6 @@ export default {
       this.$emit('emitChecked', this.checkedFilters);
     },
     checkCheckbox(e) {
-      console.log(e.path[4].children[1].checked)
       let checked = e.path[4].children[1].checked;
       let index = this.checkedFilters.indexOf(e.path[4].children[1].value);
       if (checked === true) {
