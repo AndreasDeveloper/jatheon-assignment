@@ -5,7 +5,7 @@
       :class="{ isActive: activeTrigger, disabledField: disableD2 }"
       @click="showDropdown"
     >
-      <span class="checkbox-select__title" v-if="checkedFilters.length < 1">No user selected</span>
+      <span class="checkbox-select__title" v-if="checkedFilters.length < 1">{{ dropdownText }}</span>
       <span class="checkbox-select__title" v-else-if="allSelected">{{ field1Text }}</span>
       <span
         class="checkbox-select__title"
@@ -32,7 +32,7 @@
         <div class="checkbox-select__select-all" v-if="!hideSA || search.length === 0">
           <ion-icon name="checkmark-outline" class="check-icon"></ion-icon>
           <input type="checkbox" :id="selectAllID" @click="selectAll" />
-          <label for="selectAll">{{selectAllText}}</label>
+          <label :for="selectAllID">{{selectAllText}}</label>
         </div>
       </div>
       <ul class="checkbox-select__filters-wrapp">
@@ -75,6 +75,9 @@ export default {
     },
     selectAllID: {
       type: String
+    },
+    dropdownText: {
+      type: String
     }
   },
   data() {
@@ -104,7 +107,12 @@ export default {
       this.selectAllText =
         this.selectAllText == "Select All" ? "Clear All" : "Select All";
       if (this.allSelected) {
-        this.field1Text = "All Users";
+        console.log(this.$props)
+        if (this.$props.dropName === 'dropdown2') {
+          this.field1Text = 'All Actions';
+        } else {
+          this.field1Text = "All Users";
+        }
         for (let i = 0; i < this.$props.list.length; i++) {
           this.checkedFilters.push(this.$props.list[i].name.toString());
         }

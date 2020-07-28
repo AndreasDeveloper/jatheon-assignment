@@ -2,8 +2,8 @@
   <div class="top-filter-nav-wrap">
     <div class="filter-elements">
       <form>
-        <jtSelect class="form-el" :list="users" :dropName="'dropdown'" :showSearch="true" :disableD2="false" :selectAllID="'selectAll'" @emitChecked="checkFilters" />
-        <jtSelect class="form-el" :list="actions" :dropName="'dropdown2'" :showSearch="false" :disableD2="disableD2" :selectAllID="'selectAll2'" />
+        <jtSelect class="form-el" :list="users" :dropName="'dropdown'" :showSearch="true" :disableD2="false" :selectAllID="'selectAll'" :dropdownText="'No user selected'" @emitChecked="checkFilters" />
+        <jtSelect class="form-el" :list="actions" :dropName="'dropdown2'" :showSearch="false" :disableD2="disableD2" :selectAllID="'selectAll2'" :dropdownText="'No actions selected'" />
         <div class="filter-field-wrap">
             <input class="select-user-el" name="filter_res" placeholder="Filter results.." v-model="filterText" />
             <ion-icon
